@@ -2,9 +2,10 @@ services:
   - type: web
     name: stockscreener-backend
     env: python
+    runtime: python-3.11
     buildCommand: |
-      cd backend && chmod +x build.sh && ./build.sh
-    startCommand: cd backend && source .venv/bin/activate && uvicorn app.main:app --host 0.0.0.0 --port $PORT
+      cd backend && pip install --upgrade pip && pip install numpy==1.24.3 && pip install -r requirements.txt
+    startCommand: cd backend && uvicorn app.main:app --host 0.0.0.0 --port $PORT
     envVars:
       - key: DATABASE_URL
         sync: false
