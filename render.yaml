@@ -20,9 +20,11 @@ services:
       - key: CORS_ORIGINS
         value: https://stockscreener-frontend.onrender.com
 
-  - type: static
+  - type: web
     name: stockscreener-frontend
     env: static
+    region: frankfurt
+    plan: free
     buildCommand: |
       cd frontend
       npm install
