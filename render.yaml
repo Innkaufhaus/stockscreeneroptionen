@@ -22,10 +22,12 @@ services:
       - key: CORS_ORIGINS
         value: https://stockscreener-frontend.onrender.com
 
-  - type: postgresql
+  - type: database
     name: stockscreener-db
     region: frankfurt
     plan: free
+    databaseName: stockscreener
+    user: stockscreener_user
     ipAllowList: []
 
   - type: static
