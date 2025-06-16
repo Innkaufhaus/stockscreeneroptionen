@@ -23,8 +23,6 @@ services:
   - type: web
     name: stockscreener-frontend
     env: static
-    region: frankfurt
-    plan: free
     buildCommand: |
       cd frontend
       npm install
