@@ -18,15 +18,15 @@ async def lifespan(app: FastAPI):
 
 app = FastAPI(
     title="Stock Screener API",
-    description="API for stock screening application powered by Polygon.io",
-    version="0.1.0",
+    description="API for stock screening and options analysis",
+    version="1.0.0",
     lifespan=lifespan
 )
 
 # Configure CORS
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=settings.CORS_ORIGINS,
+    allow_origins=settings.CORS_ORIGINS.split(","),
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
@@ -34,6 +34,14 @@ app.add_middleware(
 
 # Include API router
 app.include_router(api_router, prefix="/api/v1")
+
+@app.get("/")
+async def root():
+    return {
+        "message": "Welcome to Stock Screener API",
+        "docs_url": "/docs",
+        "redoc_url": "/redoc"
+    }
 
 @app.get("/health")
 async def health_check():
